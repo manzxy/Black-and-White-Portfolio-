@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y4ku - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="particles-container"></div>
+    
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">Y4KU</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-text">Initializing Creative Space...</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand">Y4KU</div>
+        <div class="nav-menu">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#music" class="nav-link">Music</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <div class="profile-ring">
+                        <div class="profile-image-wrapper">
+                            <img src="profile.jpg" alt="Y4ku Profile" class="profile-image">
+                            <div class="profile-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">SIMPLE</span>
+                        <span class="title-line">PORTFOLIO</span>
+                    </h1>
+                    <p class="hero-subtitle">Digital Creator • Anime Lovers • Writter</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="1">0</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="1">0</span>
+                            <span class="stat-label">Tracks</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-label">Hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+                <span>Scroll to explore</span>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">Welcome to my digital universe, where creativity knows no boundaries and imagination becomes reality.</p>
+                    <p>I am a digital creator who combines the worlds of gaming, coding, and webnovel writing into one creative universe. For me, technology is not just a tool, but a canvas; writing is not just words, but a living world; and games are not just entertainment, but a limitless source of inspiration. My journey started with simple curiosity—how code can bring ideas to life, how games can shape stories, and how written stories can touch the souls of others.</p>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <div class="skill-icon">✍️</div>
+                        <h3>Writer</h3>
+                        <p>Writing stories with long narratives and the best world building</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🎮</div>
+                        <h3>Game</h3>
+                        <p>Adaptation game skills</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">💻</div>
+                        <h3>Coding</h3>
+                        <p>Building interactive experiences through code</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="music" class="music-section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Track</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="music-player-container">
+                <div class="music-player">
+                    <div class="player-background"></div>
+                    <div class="music-visualizer">
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                    </div>
+                    <div class="music-info">
+                        <h3 class="song-title">Love for You</h3>
+                        <p class="artist">loveli lori</p>
+                    </div>
+                    <div class="player-controls">
+                        <button class="control-btn prev-btn">⏮</button>
+                        <button class="control-btn play-btn" id="playBtn">
+                            <span class="play-icon">▶</span>
+                            <span class="pause-icon" style="display: none;">⏸</span>
+                        </button>
+                        <button class="control-btn next-btn">⏭</button>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                            <div class="progress-handle" id="progressHandle"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">2:50</span>
+                        </div>
+                    </div>
+                    <div class="volume-section">
+                        <span class="volume-icon">🔊</span>
+                        <div class="volume-slider">
+                            <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                        </div>
+                    </div>
+                </div>
+                <audio id="audioPlayer" preload="metadata">
+                    <source src="song.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <h2 class="section-title">Connect With Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-intro">
+                    <p>Ready to collaborate on something amazing? Let's create something extraordinary together.</p>
+                </div>
+                <div class="social-grid">
+                    <a href="https://wa.me/6281297662535" target="_blank" class="social-card whatsapp">
+                        <div class="social-icon">📱</div>
+                        <div class="social-info">
+                            <h3>WhatsApp</h3>
+                            <p>Direct messaging</p>
+                        </div>
+                        <div class="social-arrow">→</div>
+                    </a>
+                    <a href="https://github.com/kuray4ku" target="_blank" class="social-card github">
+                        <div class="social-icon">🐙</div>
+                        <div class="social-info">
+                            <h3>GitHub</h3>
+                            <p>Code repositories</p>
+                        </div>
+                        <div class="social-arrow">→</div>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61579377383768" target="_blank" class="social-card facebook">
+                        <div class="social-icon">📘</div>
+                        <div class="social-info">
+                            <h3>Facebook</h3>
+                            <p>Social updates</p>
+                        </div>
+                        <div class="social-arrow">→</div>
+                    </a>
+                    <a href="https://discord.gg/gmfybvn5" target="_blank" class="social-card discord">
+                        <div class="social-icon">🎮</div>
+                        <div class="social-info">
+                            <h3>Discord</h3>
+                            <p>Community chat</p>
+                        </div>
+                        <div class="social-arrow">→</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">Y4KU</div>
+                <div class="footer-text">
+                    <p>&copy; 2025 Y4ku. Crafted with passion and creativity.</p>
+                    <p>All rights reserved. Made with ❤️</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
