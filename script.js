@@ -514,20 +514,32 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// === MODE PUTIH / HITAM ===
-const themeToggle = document.getElementById("themeToggle");
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "light") {
-  document.body.classList.add("light-mode");
-  themeToggle.textContent = "🌙";
-} else {
-  themeToggle.textContent = "☀️";
-}
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light-mode");
-  const isLight = document.body.classList.contains("light-mode");
-  themeToggle.textContent = isLight ? "🌙" : "☀️";
-  localStorage.setItem("theme", isLight ? "light" : "dark");
+// ==== Smooth Fade In On Scroll ====
+window.addEventListener('scroll', () => {
+  const elements = document.querySelectorAll('section, .navbar, .footer');
+  elements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add('visible');
+    }
+  });
 });
+
+// ==== Background Parallax Effect ====
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  document.body.style.backgroundPositionY = `${scrollY * 0.2}px`;
+});
+
+// ==== Generate Particles ====
+const particlesContainer = document.getElementById('particles-container');
+const particleCount = 70;
+
+for (let i = 0; i < particleCount; i++) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.left = `${Math.random() * 100}%`;
+  particle.style.animationDuration = `${5 + Math.random() * 10}s`;
+  particle.style.animationDelay = `${Math.random() * 5}s`;
+  particlesContainer.appendChild(particle);
+}
