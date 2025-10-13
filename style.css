@@ -869,3 +869,43 @@ section {
         font-size: 2rem;
     }
 }
+
+:root {
+  --bg-color: #0a0a0a;
+  --text-color: #ffffff;
+  --card-bg: #141414;
+  --accent-color: #00ffff;
+}
+
+body.light-mode {
+  --bg-color: #f5f5f5;
+  --text-color: #121212;
+  --card-bg: #ffffff;
+  --accent-color: #0066ff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+.navbar {
+  background: var(--card-bg);
+  transition: background 0.3s;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 22px;
+  margin-left: 10px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: rotate(25deg);
+  color: var(--accent-color);
+}
