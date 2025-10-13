@@ -8,58 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* 🌗 Tema dasar */
-        :root {
-            --bg-color: #0b0c10;
-            --text-color: #ffffff;
-            --accent-color: #00e0ff;
-            --card-bg: #111317;
-        }
-
-        body.light-mode {
-            --bg-color: #f6f6f6;
-            --text-color: #111111;
-            --accent-color: #0078ff;
-            --card-bg: #ffffff;
-        }
-
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            transition: background 0.6s ease, color 0.6s ease;
-        }
-
-        /* 🌙 Tombol ganti tema */
-        .theme-toggle {
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-            font-size: 18px;
-            border-radius: 12px;
-            padding: 8px 14px;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--accent-color);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--accent-color);
-        }
-
-        /* Elemen lain ikut tema */
-        .navbar, .footer, .skill-item, .social-card {
-            background: var(--card-bg);
-            color: var(--text-color);
-            transition: background 0.6s ease, color 0.6s ease;
-        }
-
-        .nav-link.active {
-            color: var(--accent-color);
-        }
-    </style>
 </head>
 <body>
     <div id="particles-container"></div>
@@ -82,7 +30,6 @@
             <a href="#music" class="nav-link">Music</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <button id="themeToggle" class="theme-toggle">🌙</button>
         <div class="nav-toggle">
             <span></span>
             <span></span>
@@ -137,7 +84,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-intro">Welcome to my digital universe, where creativity knows no boundaries and imagination becomes reality.</p>
-                    <p>Hi, I’m Manzxy — a programmer, digital marketet, and eSports player who’s passionate about creativity, technology, and self-improvement...</p> 
+                    <p>Hi, I’m Manzxy — a programmer, digital marketet, and eSports player who’s passionate about creativity, technology, and self-improvement. I love transforming ideas into real projects through coding and exploring how digital marketing can help those projects reach more people. I’m always eager to learn new things, whether it’s mastering a new programming framework, studying marketing trends, or improving my strategy in competitive gaming. Beyond the tech world, I enjoy watching anime and reading manhwa and manhua, which fuel my imagination and inspire new ideas. Every story, match, and line of code pushes me to grow and become better every day</p> 
                 </div>
                 <div class="skills-container">
                     <div class="skill-item">
@@ -148,7 +95,7 @@
                     <div class="skill-item">
                          <div class="skill-icon">📖</div>
                          <h3>Reading</h3>
-                         <p>I enjoy reading comics, manhwa, and manhua in my free time...</p>
+                         <p>I enjoy reading comics, manhwa, and manhua in my free time. It’s a way for me to relax, explore new stories, and get inspired by different worlds and art styles.</p>
                     </div>
                     <div class="skill-item">
                         <div class="skill-icon">🎮</div>
@@ -171,21 +118,80 @@
             </div>
             <div class="music-player-container">
                 <div class="music-player">
+                    <div class="player-background"></div>
+                    <div class="music-visualizer">
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                    </div>
                     <div class="music-info">
                         <h3 class="song-title">Love for You</h3>
                         <p class="artist">loveli lori</p>
                     </div>
                     <div class="player-controls">
+                        <button class="control-btn prev-btn">⏮</button>
                         <button class="control-btn play-btn" id="playBtn">
                             <span class="play-icon">▶</span>
                             <span class="pause-icon" style="display: none;">⏸</span>
                         </button>
+                        <button class="control-btn next-btn">⏭</button>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                            <div class="progress-handle" id="progressHandle"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">2:50</span>
+                        </div>
+                    </div>
+                    <div class="volume-section">
+                        <span class="volume-icon">🔊</span>
+                        <div class="volume-slider">
+                            <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                        </div>
                     </div>
                 </div>
                 <audio id="audioPlayer" preload="metadata">
                     <source src="song.mp3" type="audio/mpeg">
-                    Browser kamu tidak mendukung audio.
+                    Your browser does not support the audio element.
                 </audio>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <h2 class="section-title">Connect With Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-intro">
+                    <p>Ready to collaborate on something amazing? Let's create something extraordinary together.</p>
+                </div>
+                <div class="social-grid">
+                    <a href="https://wa.me/6288989721627" target="_blank" class="social-card whatsapp">
+                        <div class="social-icon">📱</div>
+                        <div class="social-info">
+                            <h3>WhatsApp</h3>
+                            <p>Direct messaging</p>
+                        </div>
+                        <div class="social-arrow">→</div>
+                    </a>
+                    <a href="https://github.com/manzxy" target="_blank" class="social-card github">
+                        <div class="social-icon">🐙</div>
+                        <div class="social-info">
+                            <h3>GitHub</h3>
+                            <p>Code repositories</p>
+                        </div>
+                        <div class="social-arrow">→</div>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -194,36 +200,12 @@
                 <div class="footer-brand">MANZXY</div>
                 <div class="footer-text">
                     <p>&copy; 2026 Manzxy. Crafted with passion and creativity.</p>
+                    <p>All rights reserved. Made with ❤️</p>
                 </div>
             </div>
         </footer>
     </div>
 
-    <script>
-        // 🎨 Toggle tema
-        const themeToggle = document.getElementById("themeToggle");
-        themeToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            themeToggle.textContent = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
-        });
-
-        // 🎵 Musik lokal
-        const playBtn = document.getElementById("playBtn");
-        const playIcon = playBtn.querySelector(".play-icon");
-        const pauseIcon = playBtn.querySelector(".pause-icon");
-        const audio = document.getElementById("audioPlayer");
-
-        playBtn.addEventListener("click", () => {
-            if (audio.paused) {
-                audio.play();
-                playIcon.style.display = "none";
-                pauseIcon.style.display = "inline";
-            } else {
-                audio.pause();
-                playIcon.style.display = "inline";
-                pauseIcon.style.display = "none";
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-                    </html>
+    </html>
