@@ -10,120 +10,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* 🌗 Warna dasar mode gelap */
+        /* 🌗 Tema dasar */
         :root {
             --bg-color: #0b0c10;
             --text-color: #ffffff;
             --accent-color: #00e0ff;
-            --secondary-bg: #11141a;
+            --card-bg: #111317;
         }
 
-        /* 🌞 Warna mode terang */
         body.light-mode {
-            --bg-color: #f8f9fa;
-            --text-color: #1a1a1a;
+            --bg-color: #f6f6f6;
+            --text-color: #111111;
             --accent-color: #0078ff;
-            --secondary-bg: #ffffff;
+            --card-bg: #ffffff;
         }
 
-        /* 🌈 Transisi lembut */
-        body, .navbar, .footer, section {
-            background-color: var(--bg-color);
+        body {
+            background: var(--bg-color);
             color: var(--text-color);
-            transition: all 0.4s ease;
+            transition: background 0.6s ease, color 0.6s ease;
         }
 
-        a, .section-title, .nav-brand, .nav-link, .footer-brand {
-            color: var(--text-color) !important;
-            transition: color 0.4s ease;
-        }
-
-        .nav-link.active, .nav-link:hover, .section-title {
-            color: var(--accent-color) !important;
-        }
-
-        /* 🌗 Tombol mode gelap/terang */
-        #themeToggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
+        /* 🌙 Tombol ganti tema */
+        .theme-toggle {
             background: var(--accent-color);
             color: #fff;
             border: none;
             font-size: 18px;
             border-radius: 12px;
-            padding: 10px 14px;
-            box-shadow: 0 0 15px var(--accent-color);
+            padding: 8px 14px;
             cursor: pointer;
-            z-index: 1000;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-color);
+            transition: all 0.3s ease;
         }
 
-        #themeToggle:hover {
+        .theme-toggle:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 25px var(--accent-color);
-        }
-
-        /* 🎵 Tombol musik */
-        #musicToggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--accent-color);
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
             box-shadow: 0 0 20px var(--accent-color);
-            z-index: 1000;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        #musicToggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px var(--accent-color);
+        /* Elemen lain ikut tema */
+        .navbar, .footer, .skill-item, .social-card {
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: background 0.6s ease, color 0.6s ease;
         }
 
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 15px var(--accent-color); }
-            50% { box-shadow: 0 0 35px var(--accent-color); }
-            100% { box-shadow: 0 0 15px var(--accent-color); }
-        }
-
-        #musicToggle.playing {
-            animation: glowPulse 1.5s infinite alternate;
-        }
-
-        /* 🌙 Navbar dan footer responsif terhadap tema */
-        .navbar, .footer {
-            background-color: var(--secondary-bg);
-            transition: background-color 0.4s ease;
-        }
-
-        .social-card {
-            background: var(--secondary-bg);
-            border: 1px solid var(--accent-color);
-            transition: background 0.4s ease, border-color 0.4s ease;
-        }
-
-        body.light-mode .social-card {
-            background: #ffffff;
-            border-color: #0078ff;
+        .nav-link.active {
+            color: var(--accent-color);
         }
     </style>
 </head>
-
 <body>
-    <!-- 🌗 Tombol Tema -->
-    <button id="themeToggle">☀️</button>
-
-    <!-- 🎵 Tombol Musik -->
-    <button id="musicToggle">▶️</button>
-
-    <!-- 🔽 Kode Asli Kamu (TIDAK DIUBAH) 🔽 -->
     <div id="particles-container"></div>
     
     <div id="loading-screen">
@@ -144,6 +82,7 @@
             <a href="#music" class="nav-link">Music</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
+        <button id="themeToggle" class="theme-toggle">🌙</button>
         <div class="nav-toggle">
             <span></span>
             <span></span>
@@ -198,7 +137,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-intro">Welcome to my digital universe, where creativity knows no boundaries and imagination becomes reality.</p>
-                    <p>Hi, I’m Manzxy — a programmer, digital marketet, and eSports player who’s passionate about creativity, technology, and self-improvement. I love transforming ideas into real projects through coding and exploring how digital marketing can help those projects reach more people. I’m always eager to learn new things, whether it’s mastering a new programming framework, studying marketing trends, or improving my strategy in competitive gaming. Beyond the tech world, I enjoy watching anime and reading manhwa and manhua, which fuel my imagination and inspire new ideas. Every story, match, and line of code pushes me to grow and become better every day</p> 
+                    <p>Hi, I’m Manzxy — a programmer, digital marketet, and eSports player who’s passionate about creativity, technology, and self-improvement...</p> 
                 </div>
                 <div class="skills-container">
                     <div class="skill-item">
@@ -209,7 +148,7 @@
                     <div class="skill-item">
                          <div class="skill-icon">📖</div>
                          <h3>Reading</h3>
-                         <p>I enjoy reading comics, manhwa, and manhua in my free time. It’s a way for me to relax, explore new stories, and get inspired by different worlds and art styles.</p>
+                         <p>I enjoy reading comics, manhwa, and manhua in my free time...</p>
                     </div>
                     <div class="skill-item">
                         <div class="skill-icon">🎮</div>
@@ -232,80 +171,21 @@
             </div>
             <div class="music-player-container">
                 <div class="music-player">
-                    <div class="player-background"></div>
-                    <div class="music-visualizer">
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                        <div class="visualizer-bar"></div>
-                    </div>
                     <div class="music-info">
                         <h3 class="song-title">Love for You</h3>
                         <p class="artist">loveli lori</p>
                     </div>
                     <div class="player-controls">
-                        <button class="control-btn prev-btn">⏮</button>
                         <button class="control-btn play-btn" id="playBtn">
                             <span class="play-icon">▶</span>
                             <span class="pause-icon" style="display: none;">⏸</span>
                         </button>
-                        <button class="control-btn next-btn">⏭</button>
-                    </div>
-                    <div class="progress-section">
-                        <div class="progress-container" id="progressContainer">
-                            <div class="progress-bar" id="progressBar"></div>
-                            <div class="progress-handle" id="progressHandle"></div>
-                        </div>
-                        <div class="time-display">
-                            <span id="currentTime">0:00</span>
-                            <span id="duration">2:50</span>
-                        </div>
-                    </div>
-                    <div class="volume-section">
-                        <span class="volume-icon">🔊</span>
-                        <div class="volume-slider">
-                            <input type="range" id="volumeSlider" min="0" max="100" value="70">
-                        </div>
                     </div>
                 </div>
                 <audio id="audioPlayer" preload="metadata">
                     <source src="song.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
+                    Browser kamu tidak mendukung audio.
                 </audio>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-            <div class="section-header">
-                <h2 class="section-title">Connect With Me</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contact-content">
-                <div class="contact-intro">
-                    <p>Ready to collaborate on something amazing? Let's create something extraordinary together.</p>
-                </div>
-                <div class="social-grid">
-                    <a href="https://wa.me/6288989721627" target="_blank" class="social-card whatsapp">
-                        <div class="social-icon">📱</div>
-                        <div class="social-info">
-                            <h3>WhatsApp</h3>
-                            <p>Direct messaging</p>
-                        </div>
-                        <div class="social-arrow">→</div>
-                    </a>
-                    <a href="https://github.com/manzxy" target="_blank" class="social-card github">
-                        <div class="social-icon">🐙</div>
-                        <div class="social-info">
-                            <h3>GitHub</h3>
-                            <p>Code repositories</p>
-                        </div>
-                        <div class="social-arrow">→</div>
-                    </a>
-                </div>
             </div>
         </section>
 
@@ -314,44 +194,36 @@
                 <div class="footer-brand">MANZXY</div>
                 <div class="footer-text">
                     <p>&copy; 2026 Manzxy. Crafted with passion and creativity.</p>
-                    <p>All rights reserved. Made with ❤️</p>
                 </div>
             </div>
         </footer>
     </div>
 
-    <audio id="audioPlayer">
-        <source src="song.mp3" type="audio/mpeg">
-        Browser kamu tidak mendukung audio.
-    </audio>
-
-    <script src="script.js"></script>
-
     <script>
-        // 🌗 Toggle Tema
+        // 🎨 Toggle tema
         const themeToggle = document.getElementById("themeToggle");
         themeToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            themeToggle.textContent = document.body.classList.contains("light-mode") ? "🌙" : "☀️";
+            themeToggle.textContent = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
         });
 
-        // 🎵 Musik Lokal
-        const musicToggle = document.getElementById("musicToggle");
+        // 🎵 Musik lokal
+        const playBtn = document.getElementById("playBtn");
+        const playIcon = playBtn.querySelector(".play-icon");
+        const pauseIcon = playBtn.querySelector(".pause-icon");
         const audio = document.getElementById("audioPlayer");
-        let isPlaying = false;
 
-        musicToggle.addEventListener("click", () => {
-            if (!isPlaying) {
+        playBtn.addEventListener("click", () => {
+            if (audio.paused) {
                 audio.play();
-                musicToggle.textContent = "⏸";
-                musicToggle.classList.add("playing");
+                playIcon.style.display = "none";
+                pauseIcon.style.display = "inline";
             } else {
                 audio.pause();
-                musicToggle.textContent = "▶️";
-                musicToggle.classList.remove("playing");
+                playIcon.style.display = "inline";
+                pauseIcon.style.display = "none";
             }
-            isPlaying = !isPlaying;
         });
     </script>
 </body>
-</html>
+                    </html>
