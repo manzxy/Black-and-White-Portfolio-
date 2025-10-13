@@ -17,51 +17,98 @@
     --glow-soft: rgba(255, 255, 255, 0.1);
 }
 
+/* === Smooth Scroll dan Body Setup === */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-    font-family: 'Rajdhani', sans-serif;
-    background: var(--primary-black);
-    color: var(--primary-white);
-    line-height: 1.6;
-    overflow-x: hidden;
-    cursor: none;
+  background: linear-gradient(-45deg, #080d13, #0f1a27, #111e2e, #080d13);
+  background-size: 400% 400%;
+  animation: gradientMove 18s ease infinite;
+  color: #e6f0ff;
+  font-family: 'Rajdhani', sans-serif;
+  transition: background 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, var(--primary-white) 2px, transparent 2px);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10000;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
+/* === Background animasi gradasi halus === */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* === Partikel efek halus === */
 #particles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(45deg, #000000 0%, #111111 50%, #000000 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
 
 .particle {
-    position: absolute;
-    background: var(--primary-white);
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float 20s infinite linear;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
 }
+
+@keyframes floatParticle {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* === Fade-In tiap section saat scroll === */
+section, .navbar, .footer {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+section.visible, .navbar.visible, .footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Scrollbar modern === */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00e1ff, #0078ff);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00b8ff, #005fff);
+}
+
+/* === Hover efek futuristik untuk link dan tombol === */
+a, button {
+  transition: all 0.3s ease;
+}
+a:hover, button:hover {
+  transform: translateY(-2px) scale(1.03);
+  text-shadow: 0 0 8px #00c6ff;
+}
+
+/* === Smooth parallax pada hero === */
+.hero-section {
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 50px 0;
+  transition: all 0.5s ease;
+    }
 
 @keyframes float {
     0% {
