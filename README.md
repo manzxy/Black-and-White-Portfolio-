@@ -46,3 +46,15 @@ cd manzxy-portfolio
 
 
 4. Buka index.html langsung di browser (klik dua kali atau pakai Live Server VSCode).
+
+📬 Kontak
+
+📱 WhatsApp: [Klik untuk Chat](https://wa.me/6288989721627)
+🐙 Gmail: [Klik Untuk Chat](humanznodejs@gmail.com)
+
+
+
+---
+
+> 🪩 Dibuat dengan penuh kreativitas dan passion oleh Manzxy
+🌐 Transforming ideas into digital reality.
