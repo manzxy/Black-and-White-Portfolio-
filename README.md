@@ -50,5 +50,5 @@ cd manzxy-portfolio
 ---
 
 > 🪩 Dibuat dengan penuh kreativitas dan passion oleh Manzxy
-> Base By
+> 🗿Base By Kuray4ku
 🌐 Transforming ideas into digital reality.
