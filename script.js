@@ -514,32 +514,79 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ==== Smooth Fade In On Scroll ====
+// 🌟 Fade-in saat scroll
 window.addEventListener('scroll', () => {
-  const elements = document.querySelectorAll('section, .navbar, .footer');
-  elements.forEach(el => {
+  document.querySelectorAll('section, .navbar, .footer').forEach(el => {
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      el.classList.add('visible');
-    }
+    if (rect.top < window.innerHeight - 100) el.classList.add('visible');
   });
 });
 
-// ==== Background Parallax Effect ====
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  document.body.style.backgroundPositionY = `${scrollY * 0.2}px`;
+// 🌌 Canvas particle
+const canvas = document.getElementById('particle-bg');
+const ctx = canvas.getContext('2d');
+let w, h, stars = [], lowPowerMode = false;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function detectPerformance() {
+  const start = performance.now();
+  let t = 0;
+  for (let i = 0; i < 1000000; i++) t += Math.sin(i);
+  lowPowerMode = performance.now() - start > 200;
+}
+detectPerformance();
+
+const starCount = lowPowerMode ? 20 : 60;
+for (let i = 0; i < starCount; i++) {
+  stars.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    size: Math.random() * (lowPowerMode ? 1.5 : 2.5),
+    speed: (lowPowerMode ? 0.2 : 0.5) + Math.random() * 0.3
+  });
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = 'rgba(255,255,255,0.8)';
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+    s.y += s.speed;
+    if (s.y > h) s.y = 0;
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// 🎧 Musik lokal
+const music = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playMusic');
+let isPlaying = false;
+
+playBtn.addEventListener('click', () => {
+  if (!isPlaying) {
+    music.play();
+    playBtn.textContent = '⏸';
+    isPlaying = true;
+  } else {
+    music.pause();
+    playBtn.textContent = '▶';
+    isPlaying = false;
+  }
 });
 
-// ==== Generate Particles ====
-const particlesContainer = document.getElementById('particles-container');
-const particleCount = 70;
-
-for (let i = 0; i < particleCount; i++) {
-  const particle = document.createElement('div');
-  particle.classList.add('particle');
-  particle.style.left = `${Math.random() * 100}%`;
-  particle.style.animationDuration = `${5 + Math.random() * 10}s`;
-  particle.style.animationDelay = `${Math.random() * 5}s`;
-  particlesContainer.appendChild(particle);
+// 🧠 Mode ringan otomatis
+if (lowPowerMode) {
+  document.body.style.animation = 'none';
+  console.log('💤 Low power mode aktif: animasi background dimatikan.');
+} else {
+  console.log('🚀 High performance mode aktif.');
 }
