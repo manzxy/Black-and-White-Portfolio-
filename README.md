@@ -36,18 +36,14 @@ manzxy-portfolio/ │ ├── index.html      # Struktur utama halaman ├─�
 1. Clone repository ini:
    ```bash
    git clone https://github.com/username/manzxy-portfolio.git
-
 2. Masuk ke folder project:
-
 cd manzxy-portfolio
-
-
 3. Pastikan file song.mp3 sudah ada di folder utama.
-
-
 4. Buka index.html langsung di browser (klik dua kali atau pakai Live Server VSCode).
 
-📬 Kontak
+--- 
+
+## 📬 Kontak
 
 📱 WhatsApp: [Klik untuk Chat](https://wa.me/6288989721627)
 🐙 Gmail: [Klik Untuk Chat](humanznodejs@gmail.com)
