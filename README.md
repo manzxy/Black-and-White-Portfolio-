@@ -1,8 +1,5 @@
 # 🌌 Manzxy — Personal Portfolio Website
 
-![Portfolio Preview - Dark Mode](preview-dark.png)
-![Portfolio Preview - Light Mode](preview-light.png)
-
 <p align="center">
   <img src="https://img.shields.io/badge/HTML5-Modern-red?style=flat-square&logo=html5" />
   <img src="https://img.shields.io/badge/CSS3-Neon%20Glow-blue?style=flat-square&logo=css3" />
@@ -16,8 +13,8 @@ Dibangun menggunakan **HTML, CSS, dan JavaScript murni** tanpa framework berat �
 ---
 
 ## ✨ Fitur Utama
-- 🌗 **Dual Theme Mode** — Dark Neon & Light Soft, transisi halus dan dinamis.
-- 💡 **Animated Glow Background** — Efek cahaya neon lembut yang bernafas.
+- 💡 **Full Dark Neon Theme** — Desain futuristik dengan efek cahaya neon biru–ungu.
+- 🔥 **Animated Glow Background** — Efek cahaya neon lembut yang bernafas.
 - 🎧 **Built-in Music Player** — Memutar lagu lokal (`song.mp3`) langsung dari browser.
 - 🔊 **Audio Visualizer** — Bar animasi mengikuti irama musik.
 - 🌫️ **Glassmorphism Navbar** — Navigasi transparan bergaya modern.
@@ -53,4 +50,5 @@ cd manzxy-portfolio
 ---
 
 > 🪩 Dibuat dengan penuh kreativitas dan passion oleh Manzxy
+> Base By
 🌐 Transforming ideas into digital reality.
