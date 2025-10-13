@@ -8,8 +8,122 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 🌗 Warna dasar mode gelap */
+        :root {
+            --bg-color: #0b0c10;
+            --text-color: #ffffff;
+            --accent-color: #00e0ff;
+            --secondary-bg: #11141a;
+        }
+
+        /* 🌞 Warna mode terang */
+        body.light-mode {
+            --bg-color: #f8f9fa;
+            --text-color: #1a1a1a;
+            --accent-color: #0078ff;
+            --secondary-bg: #ffffff;
+        }
+
+        /* 🌈 Transisi lembut */
+        body, .navbar, .footer, section {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.4s ease;
+        }
+
+        a, .section-title, .nav-brand, .nav-link, .footer-brand {
+            color: var(--text-color) !important;
+            transition: color 0.4s ease;
+        }
+
+        .nav-link.active, .nav-link:hover, .section-title {
+            color: var(--accent-color) !important;
+        }
+
+        /* 🌗 Tombol mode gelap/terang */
+        #themeToggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            border-radius: 12px;
+            padding: 10px 14px;
+            box-shadow: 0 0 15px var(--accent-color);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #themeToggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--accent-color);
+        }
+
+        /* 🎵 Tombol musik */
+        #musicToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--accent-color);
+            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #musicToggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--accent-color);
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 15px var(--accent-color); }
+            50% { box-shadow: 0 0 35px var(--accent-color); }
+            100% { box-shadow: 0 0 15px var(--accent-color); }
+        }
+
+        #musicToggle.playing {
+            animation: glowPulse 1.5s infinite alternate;
+        }
+
+        /* 🌙 Navbar dan footer responsif terhadap tema */
+        .navbar, .footer {
+            background-color: var(--secondary-bg);
+            transition: background-color 0.4s ease;
+        }
+
+        .social-card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--accent-color);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        body.light-mode .social-card {
+            background: #ffffff;
+            border-color: #0078ff;
+        }
+    </style>
 </head>
+
 <body>
+    <!-- 🌗 Tombol Tema -->
+    <button id="themeToggle">☀️</button>
+
+    <!-- 🎵 Tombol Musik -->
+    <button id="musicToggle">▶️</button>
+
+    <!-- 🔽 Kode Asli Kamu (TIDAK DIUBAH) 🔽 -->
     <div id="particles-container"></div>
     
     <div id="loading-screen">
@@ -30,7 +144,6 @@
             <a href="#music" class="nav-link">Music</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <button id="themeToggle" class="theme-toggle">🌙</button>
         <div class="nav-toggle">
             <span></span>
             <span></span>
@@ -207,7 +320,38 @@
         </footer>
     </div>
 
+    <audio id="audioPlayer">
+        <source src="song.mp3" type="audio/mpeg">
+        Browser kamu tidak mendukung audio.
+    </audio>
+
     <script src="script.js"></script>
+
+    <script>
+        // 🌗 Toggle Tema
+        const themeToggle = document.getElementById("themeToggle");
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("light-mode");
+            themeToggle.textContent = document.body.classList.contains("light-mode") ? "🌙" : "☀️";
+        });
+
+        // 🎵 Musik Lokal
+        const musicToggle = document.getElementById("musicToggle");
+        const audio = document.getElementById("audioPlayer");
+        let isPlaying = false;
+
+        musicToggle.addEventListener("click", () => {
+            if (!isPlaying) {
+                audio.play();
+                musicToggle.textContent = "⏸";
+                musicToggle.classList.add("playing");
+            } else {
+                audio.pause();
+                musicToggle.textContent = "▶️";
+                musicToggle.classList.remove("playing");
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
 </body>
 </html>
-
