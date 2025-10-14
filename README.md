@@ -29,14 +29,124 @@ manzxy-portfolio/ │ ├── index.html      # Struktur utama halaman ├─�
 
 ---
 
-## 🚀 Cara Menjalankan
-1. Clone repository ini:
+## 🚀 Cara Menjalankan di Localhost
+1. Download atau clone project:
    ```bash
    git clone https://github.com/username/manzxy-portfolio.git
-2. Masuk ke folder project:
+
+2. Masuk ke folder:
+
 cd manzxy-portfolio
+
+
 3. Pastikan file song.mp3 sudah ada di folder utama.
-4. Buka index.html langsung di browser (klik dua kali atau pakai Live Server VSCode).
+
+
+4. Jalankan di browser:
+
+Klik dua kali index.html, atau
+
+Gunakan Live Server (VSCode extension).
+
+
+
+
+
+---
+
+🖥️ Instalasi di VPS (Ubuntu Server)
+
+1️⃣ Login ke VPS
+
+ssh root@IP_VPS_KAMU
+
+2️⃣ Install Web Server (Nginx)
+
+apt update && apt upgrade -y
+apt install nginx -y
+systemctl enable nginx
+systemctl start nginx
+
+3️⃣ Upload File Website
+
+Gunakan SCP dari komputer kamu:
+
+scp -r manzxy-portfolio/* root@IP_VPS_KAMU:/var/www/html/
+
+Atau gunakan file manager panel jika ada.
+
+4️⃣ Ubah Permission File
+
+chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html
+
+5️⃣ (Opsional) Gunakan Domain
+
+Buat konfigurasi baru:
+
+nano /etc/nginx/sites-available/manzxy.conf
+
+Isi:
+
+server {
+    listen 80;
+    server_name manzxy.my.id;
+
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+Aktifkan & restart:
+
+ln -s /etc/nginx/sites-available/manzxy.conf /etc/nginx/sites-enabled/
+nginx -t
+systemctl restart nginx
+
+Sekarang buka http://manzxy.my.id 🌐
+
+6️⃣ (Opsional) Tambahkan HTTPS Gratis
+
+apt install certbot python3-certbot-nginx -y
+certbot --nginx -d manzxy.my.id
+
+
+---
+
+⚡ Auto Deploy (Opsional)
+
+Agar website otomatis update setiap kali kamu push ke GitHub:
+
+1. Masuk ke VPS:
+
+cd /var/www/html
+git init
+git remote add origin https://github.com/username/manzxy-portfolio.git
+
+
+2. Buat file deploy.sh:
+
+nano /root/deploy.sh
+
+Isi:
+
+#!/bin/bash
+cd /var/www/html
+git pull origin main
+systemctl reload nginx
+echo "Website updated successfully!"
+
+
+3. Jadikan executable:
+
+chmod +x /root/deploy.sh
+
+
+4. Set GitHub webhook ke http://IP_VPS_KAMU:9000/deploy
+(Gunakan service kecil seperti webhookd atau express.js kalau mau otomatis penuh.)
 
 --- 
 
