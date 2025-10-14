@@ -514,79 +514,171 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// 🌟 Fade-in saat scroll
-window.addEventListener('scroll', () => {
-  document.querySelectorAll('section, .navbar, .footer').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+/* ------------------ CyberFunk JS (optimized) ------------------ */
+/* Responsible for: particles canvas, smooth fade-in, parallax, audio player + visualizer */
+
+/* Helpers */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+const throttle = (fn, wait=100) => {
+  let last = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - last >= wait) { last = now; fn(...args); }
+  };
+};
+
+/* ---------- Fade-in on scroll ---------- */
+function revealOnScroll(){
+  const items = $$('section, .navbar, .footer');
+  const vh = window.innerHeight;
+  items.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < vh - 80) el.classList.add('visible');
   });
-});
-
-// 🌌 Canvas particle
-const canvas = document.getElementById('particle-bg');
-const ctx = canvas.getContext('2d');
-let w, h, stars = [], lowPowerMode = false;
-
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
 }
+window.addEventListener('scroll', throttle(revealOnScroll, 120));
+window.addEventListener('load', revealOnScroll);
+
+/* ---------- Canvas particles (optimized) ---------- */
+const canvas = $('#particle-canvas');
+const ctx = canvas.getContext('2d');
+let W=0,H=0;
+function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
 window.addEventListener('resize', resize);
 resize();
 
-function detectPerformance() {
-  const start = performance.now();
-  let t = 0;
-  for (let i = 0; i < 1000000; i++) t += Math.sin(i);
-  lowPowerMode = performance.now() - start > 200;
+/* Performance detection (light) */
+function isLowPower(){
+  const t0 = performance.now();
+  let s=0;
+  for(let i=0;i<200000;i++) s+=Math.sqrt(i);
+  return (performance.now() - t0) > 120;
 }
-detectPerformance();
+const lowPower = isLowPower();
 
-const starCount = lowPowerMode ? 20 : 60;
-for (let i = 0; i < starCount; i++) {
-  stars.push({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    size: Math.random() * (lowPowerMode ? 1.5 : 2.5),
-    speed: (lowPowerMode ? 0.2 : 0.5) + Math.random() * 0.3
-  });
-}
+/* Particle pool */
+const PARTS = lowPower ? 36 : 100;
+const parts = new Array(PARTS).fill(0).map(()=>({
+  x: Math.random()*W,
+  y: Math.random()*H,
+  r: Math.random()*2.2 + 0.2,
+  vx: (Math.random()-0.5)*0.25,
+  vy: - (0.15 + Math.random()*0.6),
+  alpha: 0.2 + Math.random()*0.8,
+  phase: Math.random()*Math.PI*2
+}));
 
-function drawStars() {
-  ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = 'rgba(255,255,255,0.8)';
-  stars.forEach(s => {
+let last = performance.now();
+function loop(now){
+  const dt = Math.min(40, now - last);
+  last = now;
+  ctx.clearRect(0,0,W,H);
+
+  // soft radial overlay
+  const g = ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0, 'rgba(0,0,0,0.02)');
+  g.addColorStop(1, 'rgba(0,0,0,0.12)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,W,H);
+
+  ctx.globalCompositeOperation = 'lighter';
+  parts.forEach(p => {
+    p.x += p.vx * (dt/16);
+    p.y += p.vy * (dt/16);
+    p.phase += 0.02*(dt/16);
+    if (p.y < -10) { p.y = H + 10; p.x = Math.random()*W; }
+    if (p.x < -20) p.x = W + 20;
+    if (p.x > W+20) p.x = -20;
+
+    const size = p.r * (1 + Math.sin(p.phase)*0.6);
+    const radial = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size*6);
+    radial.addColorStop(0, `rgba(0,224,255,${0.12 * p.alpha})`);
+    radial.addColorStop(0.5, `rgba(143,0,255,${0.06 * p.alpha})`);
+    radial.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = radial;
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, size*3.5, 0, Math.PI*2);
     ctx.fill();
-    s.y += s.speed;
-    if (s.y > h) s.y = 0;
+
+    // core
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${0.6 * p.alpha})`;
+    ctx.arc(p.x, p.y, Math.max(0.3, p.r*0.6), 0, Math.PI*2);
+    ctx.fill();
   });
-  requestAnimationFrame(drawStars);
+  ctx.globalCompositeOperation = 'source-over';
+  requestAnimationFrame(loop);
 }
-drawStars();
+requestAnimationFrame(loop);
 
-// 🎧 Musik lokal
-const music = document.getElementById('bgMusic');
-const playBtn = document.getElementById('playMusic');
-let isPlaying = false;
+/* ---------- Parallax subtle (move canvas with scroll) ---------- */
+window.addEventListener('scroll', throttle(()=>{
+  const y = window.scrollY;
+  canvas.style.transform = `translateY(${y * 0.015}px)`;
+  document.body.style.backgroundPosition = `center ${-y * 0.02}px`;
+},50));
 
-playBtn.addEventListener('click', () => {
-  if (!isPlaying) {
-    music.play();
-    playBtn.textContent = '⏸';
-    isPlaying = true;
+/* ---------- Audio Player + Visualizer ---------- */
+const audio = $('#audioPlayer') || $('#audioPlayerLocal') || $('#audioPlayerLocal'); // try multiple ids
+const playBtn = $('#playBtn'); // keep original button in markup
+const floatBtn = $('#musicFloat'); // floating control
+
+// ensure we pick the correct audio element
+const audioEl = $('#audioPlayerLocal') || $('#audioPlayer') || $('#audioPlayer'); 
+
+// Attach handlers for both buttons (floating + inline)
+function togglePlay(){
+  if (!audioEl) return;
+  if (audioEl.paused) {
+    audioEl.play().catch(()=>{});
+    if (playBtn){ playBtn.querySelector('.play-icon').style.display='none'; playBtn.querySelector('.pause-icon').style.display='inline'; }
+    floatBtn.textContent = '⏸';
   } else {
-    music.pause();
-    playBtn.textContent = '▶';
-    isPlaying = false;
+    audioEl.pause();
+    if (playBtn){ playBtn.querySelector('.play-icon').style.display='inline'; playBtn.querySelector('.pause-icon').style.display='none'; }
+    floatBtn.textContent = '▶';
   }
+}
+if (playBtn) playBtn.addEventListener('click', togglePlay);
+if (floatBtn) floatBtn.addEventListener('click', togglePlay);
+
+// Visualizer (create audio context on first user gesture)
+let audioCtx, analyser, src;
+function startVisualizerOnce(){
+  if (audioCtx) return;
+  try{
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    src = audioCtx.createMediaElementSource(audioEl);
+    src.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    const bufferLen = analyser.frequencyBinCount;
+    const data = new Uint8Array(bufferLen);
+    const bars = $$('.visualizer-bar');
+
+    (function draw(){
+      analyser.getByteFrequencyData(data);
+      for (let i=0;i<bars.length;i++){
+        const val = data[Math.floor(i * bufferLen / bars.length)] || 0;
+        const h = Math.max(6, (val/255) * 80);
+        bars[i].style.height = h + 'px';
+        bars[i].style.opacity = 0.4 + (val/255)*0.6;
+      }
+      requestAnimationFrame(draw);
+    })();
+  }catch(e){
+    // ignore if audio context fails
+  }
+}
+// start visualizer on first click anywhere (user gesture)
+const initOnce = ()=>{ if (audioEl) startVisualizerOnce(); document.removeEventListener('click', initOnce); };
+document.addEventListener('click', initOnce);
+
+/* ---------- Accessibility shortcuts ---------- */
+document.addEventListener('keydown', (e)=>{
+  if (e.key === 'm') togglePlay(); // m => music
 });
 
-// 🧠 Mode ringan otomatis
-if (lowPowerMode) {
-  document.body.style.animation = 'none';
-  console.log('💤 Low power mode aktif: animasi background dimatikan.');
-} else {
-  console.log('🚀 High performance mode aktif.');
-}
+/* End of file */
