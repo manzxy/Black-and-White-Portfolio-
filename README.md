@@ -32,11 +32,7 @@ manzxy-portfolio/ │ ├── index.html      # Struktur utama halaman ├─�
 ## 🚀 Cara Menjalankan di Localhost
 1. Download atau clone project:
    ```bash
-   git clone https://github.com/username/manzxy-portfolio.git
-
-2. Masuk ke folder:
-
-cd manzxy-portfolio
+   git clone https://github.com/manzxy/portofolio.git
 
 
 3. Pastikan file song.mp3 sudah ada di folder utama.
@@ -50,11 +46,9 @@ Gunakan Live Server (VSCode extension).
 
 
 
-
-
 ---
 
-🖥️ Instalasi di VPS (Ubuntu Server)
+## 🖥️ Instalasi di VPS (Ubuntu Server)
 
 1️⃣ Login ke VPS
 
@@ -71,7 +65,7 @@ systemctl start nginx
 
 Gunakan SCP dari komputer kamu:
 
-scp -r manzxy-portfolio/* root@IP_VPS_KAMU:/var/www/html/
+scp -r portfolio/* root@IP_VPS_KAMU:/var/www/html/
 
 Atau gunakan file manager panel jika ada.
 
@@ -90,7 +84,7 @@ Isi:
 
 server {
     listen 80;
-    server_name manzxy.my.id;
+    server_name suki.my.id;
 
     root /var/www/html;
     index index.html;
@@ -106,12 +100,12 @@ ln -s /etc/nginx/sites-available/manzxy.conf /etc/nginx/sites-enabled/
 nginx -t
 systemctl restart nginx
 
-Sekarang buka http://manzxy.my.id 🌐
+Sekarang buka http://suki.my.id 🌐
 
 6️⃣ (Opsional) Tambahkan HTTPS Gratis
 
 apt install certbot python3-certbot-nginx -y
-certbot --nginx -d manzxy.my.id
+certbot --nginx -d suki.my.id
 
 
 ---
@@ -124,7 +118,7 @@ Agar website otomatis update setiap kali kamu push ke GitHub:
 
 cd /var/www/html
 git init
-git remote add origin https://github.com/username/manzxy-portfolio.git
+git remote add origin https://github.com/manzxy/portofolio.git
 
 
 2. Buat file deploy.sh:
