@@ -25,7 +25,7 @@ Dibangun menggunakan **HTML, CSS, dan JavaScript murni** tanpa framework berat �
 
 ## 📁 Struktur Folder
 
-manzxy-portfolio/ │ ├── index.html      # Struktur utama halaman ├── style.css       # Styling & animasi (dark & light mode + glow effect) ├── script.js       # Interaksi, efek scroll, player, dan toggle tema ├── song.mp3        # (Opsional) Lagu yang ingin diputar ├── preview-dark.png  # Screenshot versi dark └── preview-light.png # Screenshot versi light
+manzxy-portfolio/ │ ├── index.html      # Struktur utama halaman ├── style.css       # Styling & animasi (dark & light mode + glow effect) ├── script.js       # Interaksi, efek scroll, player, dan toggle tema ├── song.mp3        # (Opsional) Lagu yang ingin diputar 
 
 ---
 
